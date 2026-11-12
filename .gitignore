@@ -48,3 +48,4 @@ package-lock.json
 
 # Misc
 .turbo/
+.DS_Store
