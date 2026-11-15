@@ -1,0 +1,19 @@
+name: forma-ai
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: forma-ai-backend:local
+    ports:
+      - "127.0.0.1:${PORT:-3000}:${PORT:-3000}"
+    environment:
+      PORT: "${PORT:-3000}"
+      NODE_ENV: "${NODE_ENV:-development}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      INTAKE_ROUTING_MODEL: "${INTAKE_ROUTING_MODEL:-gpt-4o-mini}"
+      INTAKE_EXTRACTION_MODEL: "${INTAKE_EXTRACTION_MODEL:-gpt-4o}"
+      LLM_TIMEOUT_MS: "${LLM_TIMEOUT_MS:-12000}"
+      LLM_MAX_RETRIES: "${LLM_MAX_RETRIES:-3}"
+    restart: unless-stopped
