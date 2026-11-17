@@ -13,7 +13,7 @@
 
 const { z } = require('zod');
 const { getRoutingModel } = require('../utils/llmProvider');
-const { formCatalogue, catalogueText } = require('../data/formCatalogue');
+const { catalogueText } = require('../data/formCatalogue');
 
 // ---------------------------------------------------------------------------
 // Structured output contract: FormRouteResponse

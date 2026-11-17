@@ -1,0 +1,41 @@
+# Dependencies
+node_modules
+
+# Local environment files; keep the example for documentation
+.env
+.env.*
+!.env.example
+
+# Local npm configuration (may contain registry credentials)
+.npmrc
+
+# Git and editor metadata
+.git
+.gitignore
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tmp
+
+# Test and build output
+coverage
+.nyc_output
+dist
+build
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Tooling and container metadata not needed in the runtime image
+eslint.config.js
+Dockerfile
+.dockerignore
