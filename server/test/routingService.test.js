@@ -150,6 +150,30 @@ describe('RoutingService', () => {
     });
   });
 
+  test('uses the fallback rationale when a low-confidence route has an empty rationale', async () => {
+    const fake = createFakeModel({
+      result: {
+        ...validRoute,
+        confidence: 0.2,
+        rationale: '',
+      },
+    });
+    const service = new RoutingService({ model: fake.model });
+
+    const result = await service.route({
+      userPrompt: 'I might need insurance help.',
+    });
+
+    expect(result).toEqual({
+      form_id: null,
+      confidence: 0.2,
+      rationale:
+        'Confidence below routing threshold; classification too uncertain.',
+      clarification_required: true,
+    });
+    expect(FormRouteResponseSchema.safeParse(result).success).toBe(true);
+  });
+
   test('accepts a route exactly at the confidence threshold', async () => {
     const thresholdRoute = {
       ...validRoute,

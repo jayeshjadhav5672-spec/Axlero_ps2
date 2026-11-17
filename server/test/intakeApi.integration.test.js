@@ -171,6 +171,16 @@ describe('GET /api/intake/health', () => {
     expect(Number.isNaN(Date.parse(response.body.timestamp))).toBe(false);
   });
 
+  test('stringifies a non-string provider response content', async () => {
+    providerInvoke.mockResolvedValue({ content: 12345 });
+
+    const response = await request(app).get('/api/intake/health');
+
+    expect(response.status).toBe(200);
+    expect(response.body.ok).toBe(true);
+    expect(response.body.providerResponse).toBe('12345');
+  });
+
   test('reports the configured routing model name', async () => {
     process.env.INTAKE_ROUTING_MODEL = 'unit-test-routing-model';
     providerInvoke.mockResolvedValue({ content: 'ok' });

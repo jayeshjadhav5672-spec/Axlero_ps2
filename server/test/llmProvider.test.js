@@ -150,6 +150,45 @@ describe('llmProvider', () => {
     expect(latestConfig().modelName).toBe('extraction-environment-model');
   });
 
+  test('getExtractionModel applies defaults when called without options', () => {
+    process.env.OPENAI_API_KEY = 'test-api-key';
+
+    getExtractionModel();
+
+    expect(latestConfig()).toEqual(
+      expect.objectContaining({
+        modelName: 'gpt-4o',
+        temperature: 0,
+        timeout: 12000,
+        maxRetries: 3,
+        openAIApiKey: 'test-api-key',
+      })
+    );
+  });
+
+  test('getExtractionModel lets explicit options override environment values', () => {
+    process.env.OPENAI_API_KEY = 'environment-key';
+    process.env.INTAKE_EXTRACTION_MODEL = 'environment-extraction-model';
+
+    getExtractionModel({
+      apiKey: 'explicit-test-key',
+      model: 'explicit-extraction-model',
+      temperature: 0.3,
+      timeoutMs: 4000,
+      maxRetries: 1,
+    });
+
+    expect(latestConfig()).toEqual(
+      expect.objectContaining({
+        modelName: 'explicit-extraction-model',
+        temperature: 0.3,
+        timeout: 4000,
+        maxRetries: 1,
+        openAIApiKey: 'explicit-test-key',
+      })
+    );
+  });
+
   test('getExtractionModel defaults to the extraction model preset', () => {
     getExtractionModel({ apiKey: 'test-api-key' });
 

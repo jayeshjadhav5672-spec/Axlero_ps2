@@ -301,6 +301,28 @@ describe('POST /api/intake/route', () => {
     });
   });
 
+  test('returns 502 with the fallback message when the thrown value has no message', async () => {
+    jestApi.spyOn(routingService, 'route').mockRejectedValueOnce({});
+
+    const response = await postRoute({
+      user_prompt: 'I need to file an insurance claim.',
+    });
+
+    expect(response.status).toBe(502);
+    expect(response.body).toEqual({
+      error: 'routing_error',
+      message: 'Failed to route the intake prompt.',
+      routing: {
+        form_id: null,
+        confidence: 0,
+        rationale:
+          'Routing service failed; unable to classify the prompt. Clarification required.',
+        clarification_required: true,
+      },
+    });
+    expect(providerInvoke).not.toHaveBeenCalled();
+  });
+
   test('returns 502 when the routing service itself throws unexpectedly', async () => {
     jestApi
       .spyOn(routingService, 'route')
