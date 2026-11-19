@@ -6,6 +6,14 @@
 
 const routingService = require('../services/routingService');
 
+function resolveService(req, key, fallback) {
+  return (
+    (req.app && req.app.locals && req.app.locals.intakeServices &&
+      req.app.locals.intakeServices[key]) ||
+    fallback
+  );
+}
+
 /**
  * POST /api/intake/route
  * Body: { user_prompt: string }
@@ -21,14 +29,18 @@ exports.routeForm = async (req, res) => {
     });
   }
 
+  const service = resolveService(req, 'routingService', routingService);
+
   try {
-    const result = await routingService.route({ userPrompt: user_prompt.trim() });
+    const result = await service.route({ userPrompt: user_prompt.trim() });
     return res.status(200).json(result);
   } catch (err) {
     // Defensive fallback: never guess on failure; require clarification.
+    // The public message stays generic so provider errors cannot leak
+    // identifiers or partially masked credentials.
     return res.status(502).json({
       error: 'routing_error',
-      message: err.message || 'Failed to route the intake prompt.',
+      message: 'Routing failed because the provider was unavailable or misconfigured.',
       routing: {
         form_id: null,
         confidence: 0.0,

@@ -1,16 +1,20 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "AI Intake Pipeline backend (Node.js / Express / LangChain)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "node --test test/",
+    "eval": "node modules/intake/eval/runEval.js",
+    "eval:live": "node modules/intake/eval/runEval.js --live --delay-ms=250"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@langchain/core": "^1.4.2",
     "@langchain/openai": "^1.8.3",
     "cors": "^2.8.6",
     "dotenv": "^18.0.10",

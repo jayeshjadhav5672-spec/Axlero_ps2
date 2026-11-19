@@ -1,0 +1,622 @@
+{
+  "version": "1.0.0",
+  "description": "Hand-authored reference model outputs used for deterministic offline evaluation. These are NOT live model results. They exercise the pipeline's routing validation, normalization, provenance checks, and review flags.",
+  "routing": {
+    "route-patent-clear": {
+      "form_id": "FORM_PATENT_INTAKE",
+      "confidence": 0.96,
+      "rationale": "The user describes inventing a device and filing a utility patent.",
+      "clarification_required": false
+    },
+    "route-tax-clear": {
+      "form_id": "FORM_TAX_FILING",
+      "confidence": 0.97,
+      "rationale": "Explicit request to file federal taxes with a filing status.",
+      "clarification_required": false
+    },
+    "route-onboarding-clear": {
+      "form_id": "FORM_EMPLOYEE_ONBOARDING",
+      "confidence": 0.95,
+      "rationale": "New hire onboarding with start date and equipment.",
+      "clarification_required": false
+    },
+    "route-claim-clear": {
+      "form_id": "FORM_INSURANCE_CLAIM",
+      "confidence": 0.96,
+      "rationale": "Auto damage and a policy number indicate an insurance claim.",
+      "clarification_required": false
+    },
+    "route-support-clear": {
+      "form_id": "FORM_SUPPORT_TICKET",
+      "confidence": 0.94,
+      "rationale": "Account login issue matches general support intake.",
+      "clarification_required": false
+    },
+    "route-ambiguous-paperwork": {
+      "form_id": null,
+      "confidence": 0.0,
+      "rationale": "The request mentions paperwork but no form domain.",
+      "clarification_required": true
+    },
+    "route-out-of-scope": {
+      "form_id": null,
+      "confidence": 0.0,
+      "rationale": "Restaurant recommendations are outside the form catalogue.",
+      "clarification_required": true
+    },
+    "route-ambiguous-mixed": {
+      "form_id": null,
+      "confidence": 0.25,
+      "rationale": "The prompt spans both tax and account support domains.",
+      "clarification_required": true
+    },
+    "route-empty": {
+      "form_id": null,
+      "confidence": 0.0,
+      "rationale": "No content to classify.",
+      "clarification_required": true
+    },
+    "route-greeting": {
+      "form_id": null,
+      "confidence": 0.0,
+      "rationale": "A greeting does not identify an intake form.",
+      "clarification_required": true
+    },
+    "route-tax-extension": {
+      "form_id": "FORM_TAX_FILING",
+      "confidence": 0.9,
+      "rationale": "Business tax return extension request.",
+      "clarification_required": false
+    },
+    "route-onboarding-contractor": {
+      "form_id": "FORM_EMPLOYEE_ONBOARDING",
+      "confidence": 0.88,
+      "rationale": "Contractor setup and payroll for a new hire.",
+      "clarification_required": false
+    },
+    "route-claim-travel": {
+      "form_id": "FORM_INSURANCE_CLAIM",
+      "confidence": 0.95,
+      "rationale": "Lost luggage on a trip with a travel insurance claim.",
+      "clarification_required": false
+    },
+    "route-support-feature": {
+      "form_id": "FORM_SUPPORT_TICKET",
+      "confidence": 0.9,
+      "rationale": "Feature request for the mobile app.",
+      "clarification_required": false
+    },
+    "route-patent-design": {
+      "form_id": "FORM_PATENT_INTAKE",
+      "confidence": 0.92,
+      "rationale": "Ornamental design protection indicates a design patent.",
+      "clarification_required": false
+    },
+    "route-tax-individual": {
+      "form_id": "FORM_TAX_FILING",
+      "confidence": 0.93,
+      "rationale": "Personal 1040 return request.",
+      "clarification_required": false
+    },
+    "route-claim-property": {
+      "form_id": "FORM_INSURANCE_CLAIM",
+      "confidence": 0.94,
+      "rationale": "Homeowners claim for water damage.",
+      "clarification_required": false
+    },
+    "route-support-billing": {
+      "form_id": "FORM_SUPPORT_TICKET",
+      "confidence": 0.95,
+      "rationale": "Duplicate charge and refund request.",
+      "clarification_required": false
+    },
+    "route-ambiguous-form": {
+      "form_id": null,
+      "confidence": 0.1,
+      "rationale": "The prompt only says a form needs to be filled out.",
+      "clarification_required": true
+    },
+    "route-injection": {
+      "form_id": null,
+      "confidence": 0.0,
+      "rationale": "The prompt attempts to force a classification and includes out-of-scope content.",
+      "clarification_required": true
+    },
+    "extract-tax-auto-route": {
+      "form_id": "FORM_TAX_FILING",
+      "confidence": 0.95,
+      "rationale": "The user asks to file an individual tax return.",
+      "clarification_required": false
+    }
+  },
+  "extraction": {
+    "extract-tax-complete": {
+      "tax_year": {
+        "value": 2025,
+        "confidence": 0.98,
+        "provenance": "2025",
+        "requires_review": false
+      },
+      "filing_status": {
+        "value": "married_filing_jointly",
+        "confidence": 0.96,
+        "provenance": "married filing jointly",
+        "requires_review": false
+      },
+      "return_type": {
+        "value": "individual",
+        "confidence": 0.93,
+        "provenance": "individual 2025 federal tax return",
+        "requires_review": false
+      },
+      "primary_income_source": {
+        "value": "wages",
+        "confidence": 0.9,
+        "provenance": "wages",
+        "requires_review": false
+      },
+      "dependents_count": {
+        "value": 2,
+        "confidence": 0.95,
+        "provenance": "2 dependents",
+        "requires_review": false
+      },
+      "needs_extension": {
+        "value": false,
+        "confidence": 0.9,
+        "provenance": "I do not need an extension",
+        "requires_review": false
+      }
+    },
+    "extract-tax-alias-mfj": {
+      "tax_year": {
+        "value": 2024,
+        "confidence": 0.98,
+        "provenance": "2024",
+        "requires_review": false
+      },
+      "filing_status": {
+        "value": "filed jointly",
+        "confidence": 0.9,
+        "provenance": "filed jointly",
+        "requires_review": false
+      },
+      "primary_income_source": {
+        "value": "W-2",
+        "confidence": 0.9,
+        "provenance": "W-2",
+        "requires_review": false
+      },
+      "dependents_count": {
+        "value": 1,
+        "confidence": 0.9,
+        "provenance": "1 dependent",
+        "requires_review": false
+      },
+      "needs_extension": {
+        "value": false,
+        "confidence": 0.85,
+        "provenance": "No extension was filed.",
+        "requires_review": false
+      }
+    },
+    "extract-tax-missing": {},
+    "extract-tax-ambiguous-status": {
+      "filing_status": {
+        "value": null,
+        "confidence": 0.2,
+        "provenance": null,
+        "requires_review": false
+      },
+      "dependents_count": {
+        "value": 0,
+        "confidence": 0.9,
+        "provenance": "0 dependents",
+        "requires_review": false
+      }
+    },
+    "extract-tax-alias-income": {
+      "tax_year": {
+        "value": 2023,
+        "confidence": 0.98,
+        "provenance": "2023",
+        "requires_review": false
+      },
+      "filing_status": {
+        "value": "head of household",
+        "confidence": 0.95,
+        "provenance": "head of household",
+        "requires_review": false
+      },
+      "primary_income_source": {
+        "value": "dividends",
+        "confidence": 0.9,
+        "provenance": "dividends",
+        "requires_review": false
+      },
+      "dependents_count": {
+        "value": 0,
+        "confidence": 0.95,
+        "provenance": "0 dependents",
+        "requires_review": false
+      },
+      "needs_extension": {
+        "value": true,
+        "confidence": 0.9,
+        "provenance": "I will file an extension",
+        "requires_review": false
+      }
+    },
+    "extract-tax-auto-route": {
+      "tax_year": {
+        "value": 2025,
+        "confidence": 0.98,
+        "provenance": "2025",
+        "requires_review": false
+      },
+      "filing_status": {
+        "value": "single",
+        "confidence": 0.9,
+        "provenance": "I am single",
+        "requires_review": false
+      },
+      "return_type": {
+        "value": "individual",
+        "confidence": 0.92,
+        "provenance": "individual tax return",
+        "requires_review": false
+      },
+      "primary_income_source": {
+        "value": "salary",
+        "confidence": 0.9,
+        "provenance": "salary",
+        "requires_review": false
+      },
+      "dependents_count": {
+        "value": 0,
+        "confidence": 0.95,
+        "provenance": "0 dependents",
+        "requires_review": false
+      }
+    },
+    "extract-tax-injection": {},
+    "extract-patent-complete": {
+      "invention_title": {
+        "value": "solar-powered water purifier",
+        "confidence": 0.9,
+        "provenance": "a solar-powered water purifier",
+        "requires_review": false
+      },
+      "patent_type": {
+        "value": "utility",
+        "confidence": 0.97,
+        "provenance": "utility patent",
+        "requires_review": false
+      },
+      "inventor_name": {
+        "value": "Dr. Maya Chen",
+        "confidence": 0.95,
+        "provenance": "Dr. Maya Chen",
+        "requires_review": false
+      },
+      "applicant_type": {
+        "value": "university",
+        "confidence": 0.9,
+        "provenance": "applicant is a university",
+        "requires_review": false
+      },
+      "technical_field": {
+        "value": "water treatment",
+        "confidence": 0.85,
+        "provenance": "water treatment field",
+        "requires_review": false
+      },
+      "prior_art_disclosed": {
+        "value": true,
+        "confidence": 0.85,
+        "provenance": "we have already identified prior art",
+        "requires_review": false
+      }
+    },
+    "extract-patent-provisional": {
+      "invention_title": {
+        "value": "smart mailbox",
+        "confidence": 0.85,
+        "provenance": "a smart mailbox",
+        "requires_review": false
+      },
+      "patent_type": {
+        "value": "provisional",
+        "confidence": 0.9,
+        "provenance": "provisional patent",
+        "requires_review": false
+      }
+    },
+    "extract-patent-missing": {},
+    "extract-onboarding-complete": {
+      "employee_name": {
+        "value": "Priya Raman",
+        "confidence": 0.97,
+        "provenance": "Priya Raman",
+        "requires_review": false
+      },
+      "role_title": {
+        "value": "backend engineer",
+        "confidence": 0.93,
+        "provenance": "backend engineer",
+        "requires_review": false
+      },
+      "employment_type": {
+        "value": "full_time",
+        "confidence": 0.92,
+        "provenance": "full-time",
+        "requires_review": false
+      },
+      "start_date": {
+        "value": "2026-03-03",
+        "confidence": 0.95,
+        "provenance": "March 3, 2026",
+        "requires_review": false
+      },
+      "work_arrangement": {
+        "value": "work remotely",
+        "confidence": 0.85,
+        "provenance": "work remotely",
+        "requires_review": false
+      },
+      "equipment_needed": {
+        "value": true,
+        "confidence": 0.9,
+        "provenance": "needs a laptop and monitor",
+        "requires_review": false
+      },
+      "department": {
+        "value": "Platform",
+        "confidence": 0.9,
+        "provenance": "Platform department",
+        "requires_review": false
+      }
+    },
+    "extract-onboarding-ambiguous-date": {
+      "employee_name": {
+        "value": "Sam Lee",
+        "confidence": 0.9,
+        "provenance": "Sam Lee",
+        "requires_review": false
+      },
+      "employment_type": {
+        "value": "contractor",
+        "confidence": 0.9,
+        "provenance": "part-time contractor",
+        "requires_review": false
+      },
+      "work_arrangement": {
+        "value": "onsite",
+        "confidence": 0.85,
+        "provenance": "onsite",
+        "requires_review": false
+      },
+      "equipment_needed": {
+        "value": false,
+        "confidence": 0.9,
+        "provenance": "Equipment is not needed",
+        "requires_review": false
+      }
+    },
+    "extract-onboarding-hybrid": {
+      "employee_name": {
+        "value": "Alex Kim",
+        "confidence": 0.95,
+        "provenance": "Alex Kim",
+        "requires_review": false
+      },
+      "employment_type": {
+        "value": "intern",
+        "confidence": 0.9,
+        "provenance": "intern",
+        "requires_review": false
+      },
+      "start_date": {
+        "value": "2026-01-15",
+        "confidence": 0.9,
+        "provenance": "15 January 2026",
+        "requires_review": false
+      },
+      "work_arrangement": {
+        "value": "hybrid",
+        "confidence": 0.9,
+        "provenance": "hybrid",
+        "requires_review": false
+      },
+      "equipment_needed": {
+        "value": true,
+        "confidence": 0.85,
+        "provenance": "We need to provide a laptop",
+        "requires_review": false
+      },
+      "department": {
+        "value": "Design",
+        "confidence": 0.9,
+        "provenance": "Design department",
+        "requires_review": false
+      }
+    },
+    "extract-onboarding-missing": {},
+    "extract-claim-complete": {
+      "policy_number": {
+        "value": "POL-88213",
+        "confidence": 0.95,
+        "provenance": "policy POL-88213",
+        "requires_review": false
+      },
+      "claim_type": {
+        "value": "auto insurance",
+        "confidence": 0.85,
+        "provenance": "auto insurance claim",
+        "requires_review": false
+      },
+      "incident_date": {
+        "value": "2025-11-02",
+        "confidence": 0.95,
+        "provenance": "2025-11-02",
+        "requires_review": false
+      },
+      "loss_description": {
+        "value": "rear-ended in a parking lot",
+        "confidence": 0.62,
+        "provenance": "rear-ended on 2025-11-02 in a parking lot",
+        "requires_review": false
+      },
+      "estimated_loss_amount": {
+        "value": 12500,
+        "confidence": 0.95,
+        "provenance": "$12,500",
+        "requires_review": false
+      },
+      "police_report_filed": {
+        "value": true,
+        "confidence": 0.9,
+        "provenance": "I filed a police report",
+        "requires_review": false
+      }
+    },
+    "extract-claim-unsupported-type": {
+      "policy_number": {
+        "value": "M-2210",
+        "confidence": 0.9,
+        "provenance": "policy M-2210",
+        "requires_review": false
+      },
+      "claim_type": {
+        "value": "marine",
+        "confidence": 0.9,
+        "provenance": "marine insurance claim",
+        "requires_review": false
+      },
+      "incident_date": {
+        "value": "2025-10-12",
+        "confidence": 0.9,
+        "provenance": "2025-10-12",
+        "requires_review": false
+      },
+      "estimated_loss_amount": {
+        "value": 40000,
+        "confidence": 0.85,
+        "provenance": "40,000 dollars",
+        "requires_review": false
+      },
+      "police_report_filed": {
+        "value": false,
+        "confidence": 0.85,
+        "provenance": "no police report was filed",
+        "requires_review": false
+      }
+    },
+    "extract-support-complete": {
+      "issue_category": {
+        "value": "login",
+        "confidence": 0.85,
+        "provenance": "log into",
+        "requires_review": false
+      },
+      "product_name": {
+        "value": "Acme Dashboard",
+        "confidence": 0.9,
+        "provenance": "Acme Dashboard",
+        "requires_review": false
+      },
+      "severity": {
+        "value": "critical",
+        "confidence": 0.95,
+        "provenance": "severity is critical",
+        "requires_review": false
+      },
+      "error_message": {
+        "value": "Invalid credentials",
+        "confidence": 0.9,
+        "provenance": "'Invalid credentials'",
+        "requires_review": false
+      },
+      "affected_users_count": {
+        "value": 12,
+        "confidence": 0.9,
+        "provenance": "12 users",
+        "requires_review": false
+      }
+    },
+    "extract-support-billing": {
+      "issue_category": {
+        "value": "billed",
+        "confidence": 0.9,
+        "provenance": "billed twice",
+        "requires_review": false
+      },
+      "product_name": {
+        "value": "Acme Billing",
+        "confidence": 0.9,
+        "provenance": "Acme Billing",
+        "requires_review": false
+      },
+      "severity": {
+        "value": "high priority",
+        "confidence": 0.9,
+        "provenance": "high priority",
+        "requires_review": false
+      },
+      "affected_users_count": {
+        "value": 3,
+        "confidence": 0.9,
+        "provenance": "3 users",
+        "requires_review": false
+      }
+    },
+    "extract-support-feature": {
+      "issue_category": {
+        "value": "enhancement",
+        "confidence": 0.9,
+        "provenance": "enhancement",
+        "requires_review": false
+      },
+      "product_name": {
+        "value": "Acme Mobile",
+        "confidence": 0.9,
+        "provenance": "Acme Mobile",
+        "requires_review": false
+      },
+      "severity": {
+        "value": "low priority",
+        "confidence": 0.9,
+        "provenance": "low priority",
+        "requires_review": false
+      },
+      "affected_users_count": {
+        "value": 1,
+        "confidence": 0.9,
+        "provenance": "1 user",
+        "requires_review": false
+      }
+    },
+    "extract-support-bad-provenance": {
+      "issue_category": {
+        "value": "billing",
+        "confidence": 0.9,
+        "provenance": "I was double charged",
+        "requires_review": false
+      },
+      "product_name": {
+        "value": "Acme Billing",
+        "confidence": 0.8,
+        "provenance": "Acme Billing",
+        "requires_review": false
+      }
+    },
+    "extract-support-malformed": {
+      "severity": {
+        "value": null,
+        "confidence": 0.1,
+        "provenance": "123",
+        "requires_review": false
+      }
+    }
+  }
+}
